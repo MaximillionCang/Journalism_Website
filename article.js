@@ -1,10 +1,10 @@
 (function () {
-  const data = window.CampusPulseData;
+  const data = window.ThreadLineData || {};
   const placeholderPath = "assets/images/placeholder.jpg";
-  const videoFallbackText = "Main news video will appear here after assets/videos/main-news.mp4 is added.";
+  const videoFallbackText = "ThreadLine News video will appear here after the local video file is added.";
 
   function allArticles() {
-    return [data.mainStory].concat(data.supportingStories);
+    return [data.mainStory].concat(data.supportingStories || []).filter(Boolean);
   }
 
   function findArticle(id) {
@@ -16,7 +16,7 @@
   }
 
   function escapeHtml(value) {
-    return String(value)
+    return String(value || "")
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
@@ -39,7 +39,7 @@
     image.dataset.fallbackListener = "true";
     image.addEventListener("error", function () {
       if (image.dataset.fallback === "ad") {
-        image.replaceWith(fallbackBox("Campus advertisement will appear here.", "ad-fallback"));
+        image.replaceWith(fallbackBox("ThreadLine News advertisement will appear here.", "ad-fallback"));
         return;
       }
 
@@ -54,10 +54,17 @@
   }
 
   function activateImageFallbacks(root) {
+    if (!root) {
+      return;
+    }
     root.querySelectorAll("img").forEach(setImageFallback);
   }
 
   function activateVideoFallbacks(root) {
+    if (!root) {
+      return;
+    }
+
     root.querySelectorAll("video").forEach((video) => {
       if (video.dataset.fallbackListener === "true") {
         return;
@@ -88,11 +95,12 @@
   }
 
   function relatedArticles(currentArticle) {
-    const categoryMatches = data.supportingStories.filter((article) => {
+    const stories = data.supportingStories || [];
+    const categoryMatches = stories.filter((article) => {
       return article.id !== currentArticle.id && article.category === currentArticle.category;
     });
 
-    const otherStories = data.supportingStories.filter((article) => {
+    const otherStories = stories.filter((article) => {
       return article.id !== currentArticle.id && article.category !== currentArticle.category;
     });
 
@@ -101,7 +109,7 @@
 
   function cardMarkup(article) {
     return `
-      <article class="news-card related-card" data-id="${escapeHtml(article.id)}">
+      <article class="news-card related-card" tabindex="0" data-id="${escapeHtml(article.id)}">
         <img src="${escapeHtml(article.image)}" alt="${escapeHtml(article.title)}">
         <span class="label">${escapeHtml(article.category)}</span>
         <h3>${escapeHtml(article.title)}</h3>
@@ -112,7 +120,7 @@
   }
 
   function renderNotFound(container) {
-    document.title = "Article not found | CampusPulse News";
+    document.title = "Article not found | ThreadLine News";
     container.innerHTML = `
       <div class="not-found">
         <h1>Article not found</h1>
@@ -123,6 +131,7 @@
   }
 
   function renderArticle(container, article) {
+    const paragraphs = Array.isArray(article.content) ? article.content : [];
     const videoMarkup = article.videoPath ? `
       <video class="article-video" controls poster="${escapeHtml(article.image)}">
         <source src="${escapeHtml(article.videoPath)}" type="video/mp4">
@@ -131,7 +140,7 @@
     ` : "";
 
     const sourceMarkup = article.sourceUrl ? `
-      <a class="source-button" href="${escapeHtml(article.sourceUrl)}" target="_blank" rel="noopener">Open source URL</a>
+      <a class="source-button" href="${escapeHtml(article.sourceUrl)}" target="_blank" rel="noopener">Read original source</a>
     ` : "";
 
     const related = relatedArticles(article);
@@ -144,47 +153,66 @@
       </section>
     ` : "";
 
-    document.title = `${article.title} | CampusPulse News`;
+    document.title = `${article.title} | ThreadLine News`;
     container.innerHTML = `
       <span class="article-kicker">${escapeHtml(article.category)}</span>
       <h1>${escapeHtml(article.title)}</h1>
       <div class="article-meta">
-        <span>By ${escapeHtml(article.author)}</span>
+        <span>By ${escapeHtml(article.author || "ThreadLine News")}</span>
         <span>${escapeHtml(article.date)}</span>
         <span>Source: ${escapeHtml(article.sourceName)}</span>
       </div>
       <img class="article-hero-image" src="${escapeHtml(article.image)}" alt="${escapeHtml(article.title)}">
       ${videoMarkup}
       <div class="article-body">
-        ${article.content.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
+        ${paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
       </div>
       ${sourceMarkup}
       ${relatedMarkup}
     `;
 
     container.querySelectorAll(".related-card").forEach((card) => {
-      card.addEventListener("click", () => {
+      const openCard = () => {
         window.location.href = `article.html?id=${encodeURIComponent(card.dataset.id)}`;
+      };
+
+      card.addEventListener("click", openCard);
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openCard();
+        }
       });
     });
   }
 
   function renderSidebar() {
-    const popular = [data.mainStory, data.supportingStories[0], data.supportingStories[2], data.supportingStories[4]];
-    const editors = [data.supportingStories[1], data.supportingStories[3], data.supportingStories[5]];
+    const popularList = document.getElementById("popularList");
+    const editorsList = document.getElementById("editorsList");
+    const stories = data.supportingStories || [];
+    const popular = [data.mainStory, stories[0], stories[2], stories[4]].filter(Boolean);
+    const editors = [stories[1], stories[3], stories[5]].filter(Boolean);
 
-    document.getElementById("popularList").innerHTML = popular.map((article) => `
-      <li><a href="${storyUrl(article)}">${escapeHtml(article.title)}</a></li>
-    `).join("");
+    if (popularList) {
+      popularList.innerHTML = popular.map((article) => `
+        <li><a href="${storyUrl(article)}">${escapeHtml(article.title)}</a></li>
+      `).join("");
+    }
 
-    document.getElementById("editorsList").innerHTML = editors.map((article) => `
-      <li><a href="${storyUrl(article)}">${escapeHtml(article.title)}</a></li>
-    `).join("");
+    if (editorsList) {
+      editorsList.innerHTML = editors.map((article) => `
+        <li><a href="${storyUrl(article)}">${escapeHtml(article.title)}</a></li>
+      `).join("");
+    }
   }
 
   function setupMoreMenu() {
     const button = document.getElementById("moreButton");
     const menu = document.getElementById("moreDropdown");
+
+    if (!button || !menu) {
+      return;
+    }
 
     button.addEventListener("click", () => {
       menu.hidden = !menu.hidden;
@@ -199,10 +227,35 @@
     });
   }
 
+  function setupMobileMenu() {
+    const button = document.getElementById("mobileMenuButton");
+    const menu = document.getElementById("mobileMenu");
+
+    if (!button || !menu) {
+      return;
+    }
+
+    button.addEventListener("click", () => {
+      menu.hidden = !menu.hidden;
+      button.setAttribute("aria-expanded", String(!menu.hidden));
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.hidden = true;
+        button.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
   function init() {
     const params = new URLSearchParams(window.location.search);
     const article = findArticle(params.get("id"));
     const container = document.getElementById("articleContent");
+
+    if (!container) {
+      return;
+    }
 
     if (!article) {
       renderNotFound(container);
@@ -212,6 +265,7 @@
 
     renderSidebar();
     setupMoreMenu();
+    setupMobileMenu();
     activateImageFallbacks(document);
     activateVideoFallbacks(document);
   }

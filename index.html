@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1280, initial-scale=1.0">
-  <title>ThreadLine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThreadLine News</title>
   <link rel="stylesheet" href="styles.css">
   <script src="data.js" defer></script>
   <script src="script.js" defer></script>
@@ -19,13 +19,13 @@
   <header class="site-header">
     <div class="header-inner">
       <div class="brand-group">
-        <button class="icon-button hamburger" type="button" aria-label="Open menu">
+        <button id="mobileMenuButton" class="icon-button hamburger" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
         </button>
         <a class="brand" href="index.html" aria-label="ThreadLine News homepage">
-          <span>CampusPulse</span>
+          <span>ThreadLine</span>
           <strong>News</strong>
         </a>
       </div>
@@ -51,11 +51,19 @@
 
       <div class="header-actions">
         <a href="article.html?id=main-campus-story">Watch</a>
-        <a href="#moreCampusStories">Listen</a>
+        <a href="#moreStories">Listen</a>
         <button id="searchToggle" class="icon-button search-button" type="button" aria-label="Search"></button>
         <button class="sign-in" type="button">Sign In</button>
       </div>
     </div>
+    <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile navigation" hidden>
+      <a href="index.html">Home</a>
+      <a href="#heroStory">Main Story</a>
+      <a href="#moreStories">More Stories</a>
+      <a href="#pollSection">Poll</a>
+      <a href="#commentsSection">Comments</a>
+      <a href="#searchPanel">Search</a>
+    </nav>
   </header>
 
   <div class="trending-row" aria-label="Trending topics">
@@ -72,8 +80,8 @@
   </div>
 
   <main class="page-shell">
-    <section class="ticker" aria-label="Campus update">
-      <strong>Campus Update</strong>
+    <section class="ticker" aria-label="News update">
+      <strong>News Update</strong>
       <span>Student leaders, faculty teams, and event committees are preparing a busy week of seminars, club showcases, and registration deadlines.</span>
     </section>
 
@@ -95,13 +103,8 @@
       <section id="heroStory" class="hero-story"></section>
 
       <aside class="right-column">
-        <div class="sidebar-ad">
-          <img src="assets/ads/sidebar-campus-ad.svg" alt="Student Career Week advertisement" data-fallback="ad">
-          <span>Advertisement</span>
-        </div>
-
         <div class="sidebar-block">
-          <h2>Popular on Campus</h2>
+          <h2>Popular on ThreadLine</h2>
           <ol id="popularList" class="popular-list"></ol>
         </div>
 
@@ -111,15 +114,40 @@
         </div>
 
         <div id="rightCompactStory" class="sidebar-block"></div>
+
+        <div id="pollSection" class="sidebar-block poll-card"></div>
+
+        <div class="sidebar-ad">
+          <img src="assets/ads/sidebar-campus-ad.svg" alt="ThreadLine News advertisement" data-fallback="ad">
+          <span>Advertisement</span>
+        </div>
       </aside>
     </section>
 
-    <section id="moreCampusStories" class="news-section">
+    <section id="moreStories" class="news-section">
       <div class="section-heading">
-        <span>Campus Desk</span>
-        <h2>More Campus Stories</h2>
+        <span>ThreadLine Desk</span>
+        <h2>More Stories</h2>
       </div>
       <div id="supportingStoriesGrid" class="card-grid"></div>
+    </section>
+
+    <section id="commentsSection" class="news-section comments-section">
+      <div class="section-heading">
+        <span>Reader Notes</span>
+        <h2 id="commentsTitle">Comments</h2>
+      </div>
+      <p id="commentsDescription" class="section-description"></p>
+      <form id="commentForm" class="comment-form">
+        <input id="commentName" type="text" maxlength="40" autocomplete="name">
+        <textarea id="commentText" maxlength="300" rows="4"></textarea>
+        <div class="comment-actions">
+          <button id="commentSubmit" class="read-more" type="submit">Post Comment</button>
+          <button id="clearComments" class="secondary-button" type="button">Clear local comments</button>
+        </div>
+      </form>
+      <div id="commentMessage" class="form-message" aria-live="polite"></div>
+      <div id="commentList" class="comment-list"></div>
     </section>
   </main>
 

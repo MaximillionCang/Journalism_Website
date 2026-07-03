@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1280, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ThreadLine News Article</title>
   <link rel="stylesheet" href="styles.css">
   <script src="data.js" defer></script>
@@ -19,7 +19,7 @@
   <header class="site-header">
     <div class="header-inner">
       <div class="brand-group">
-        <button class="icon-button hamburger" type="button" aria-label="Open menu">
+        <button id="mobileMenuButton" class="icon-button hamburger" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -51,11 +51,19 @@
 
       <div class="header-actions">
         <a href="article.html?id=main-campus-story">Watch</a>
-        <a href="index.html#moreCampusStories">Listen</a>
+        <a href="index.html#moreStories">Listen</a>
         <a class="icon-button search-button" href="index.html#searchPanel" aria-label="Search"></a>
         <button class="sign-in" type="button">Sign In</button>
       </div>
     </div>
+    <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile navigation" hidden>
+      <a href="index.html">Home</a>
+      <a href="index.html#heroStory">Main Story</a>
+      <a href="index.html#moreStories">More Stories</a>
+      <a href="index.html#pollSection">Poll</a>
+      <a href="index.html#commentsSection">Comments</a>
+      <a href="index.html#searchPanel">Search</a>
+    </nav>
   </header>
 
   <div class="trending-row" aria-label="Trending topics">
@@ -72,8 +80,8 @@
   </div>
 
   <main class="page-shell article-page">
-    <section class="ticker article-ticker" aria-label="Campus update">
-      <strong>Campus Update</strong>
+    <section class="ticker article-ticker" aria-label="News update">
+      <strong>News Update</strong>
       <span>University offices and student groups are posting new event notices, academic reminders, and registration updates this week.</span>
     </section>
 
@@ -87,7 +95,7 @@
         </div>
 
         <div class="sidebar-block">
-          <h2>Popular on Campus</h2>
+          <h2>Popular on ThreadLine</h2>
           <ol id="popularList" class="popular-list"></ol>
         </div>
 
