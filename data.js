@@ -5,7 +5,7 @@
 const mainStory = {
   id: "main-campus-story",
   title: "Coming soon",
-  category: "Campus",
+  category: "Event",
   date: "July 2, 2026",
   image: "assets/images/main-story.jpg",
   videoPath: "assets/videos/main-news.mp4",
@@ -130,12 +130,12 @@ const supportingStories = [
 // Edit this homepage poll text and options as needed.
 const homepagePoll = {
   id: "homepage-poll-1",
-  question: "Which topic should ThreadLine News cover next?",
+  question: "Which topic should Threadlines News cover next?",
   options: [
-    "Campus events",
-    "Student life",
-    "Academic tips",
-    "Sports updates"
+    "fashion business",
+    "trends",
+    "fashion events",
+    "brand strategy"
   ]
 };
 
