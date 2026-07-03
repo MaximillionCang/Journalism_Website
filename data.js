@@ -4,7 +4,7 @@
 
 const mainStory = {
   id: "main-campus-story",
-  title: "Coming soon",
+  title: "Second-Hand, First Choice: FYNEDRIP Brings Thrifting Culture to Xiamen University",
   category: "Event",
   date: "July 2, 2026",
   image: "assets/images/main-story.jpg",
@@ -12,11 +12,26 @@ const mainStory = {
   summary: "The main story is reserved for your manually written campus report and local video file. Replace this sample text when your final story is ready.",
   sourceName: "ThreadLine News Desk",
   sourceUrl: "https://example.com/main-campus-story",
-  author: "ThreadLine News Staff",
+  author: "YOVELA KARUNIA",
   content: [
-    "The university media team is preparing a feature package that will highlight student projects, campus activities, and voices from across the community.",
-    "This sample article is written as a simple placeholder. Replace the headline, summary, author, source, and paragraphs with your own reporting when the story is complete.",
-    "The video area uses a local file path so the main news video can be added later without changing the page layout or JavaScript."
+    "SEPANG: Students and fashion enthusiasts gathered at Xiamen University Malaysia during a thrifting event for a cheaper and more sustainable choice of fashion last Thursday.",
+    "The vice-organising chairperson of FyneDrip, Then Nelsen said that purchasing second-hand clothing would reduce textile-waste of the fashion industry, especially among a generation that has such an interest in shopping. ",
+    "“Students are satisfied with this event and they look interested because this is the first thrifting event in Xiamen,” he said.",
+    "Living in a university in the outskirts of the city, students get a chance to purchase good quality clothes without having to travel far.",
+    "“I hope visitors can know that if you want to buy a good style or good shirt, you can go thrifting with a low price,” Nelsen added..",
+    "As a sports enthusiast, a customer at FyneDrip, Ricwan Victoriano agrees that thrifting provides a much cheaper alternative than buying the original piece, especially when looking for sports jerseys.",
+    "He also added that thrifting does not only benefit himself as a customer, but also towards the environment that everybody lives in.",
+    "\"I think thrifting is very important because these days, mostly everything is environmentally friendly so I think fashion can also catch up with the times,\" Victoriano said.",
+    "Not only from the perspective of the customers, vendor owners are also being more aware of what is happening in the fashion industry.",
+    "“More people are aware that it's (the fashion industry) ruining our environment,” Cherlyn, a thrifting vendor said about the textile waste from fast fashion.",
+    "“Child labour has been a really bad thing, especially when it comes to the clothes business,” she added.",
+    "Cherlyn also said that thrifting has been increasingly trending since a lot of people are interested in nostalgic trends such as clothes from the 2000s.",
+    "“It's more vibrant, it's more colourful, it's more playful,” she said.",
+    "Cherlyn added that thrifting requires more effort in the curation of collections that are appropriate to sell.",
+    "“I select based on what I think my personal style is and what I do like.”",
+    "“Some of the clothes are clothes I've never worn, but they're clothes I would like to wear,” she said.",
+    "Throughout the event, many people came in and purchased various types of clothing including accessories like bracelets or belts.",
+    "Nelsen said that feedback from customers and students are mostly positive feedback, as a lot of them are interested in the personally curated collections available."
   ],
   isMainStory: true
 };
