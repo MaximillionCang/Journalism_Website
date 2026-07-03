@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="520" viewBox="0 0 360 520" role="img" aria-labelledby="title desc">
+  <title id="title">Student Career Week advertisement</title>
+  <desc id="desc">A vertical campus career event promotion for Student Career Week.</desc>
+  <rect width="360" height="520" fill="#ffffff"/>
+  <rect x="0" y="0" width="360" height="108" fill="#111111"/>
+  <rect x="0" y="108" width="360" height="12" fill="#c90000"/>
+  <path d="M255 0 H360 V108 H292 Z" fill="#c90000"/>
+  <circle cx="300" cy="54" r="30" fill="#ffffff"/>
+  <path d="M284 57 H316 M300 41 V73" stroke="#c90000" stroke-width="7" stroke-linecap="square"/>
+  <text x="30" y="43" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800">CAREER CENTER</text>
+  <text x="30" y="76" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="900">Career Week</text>
+  <path d="M280 120 H360 V250 H332 Z" fill="#111111" opacity="0.05"/>
+  <text x="30" y="168" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="39" font-weight="900">Student</text>
+  <text x="30" y="211" fill="#c90000" font-family="Arial, Helvetica, sans-serif" font-size="39" font-weight="900">Career Week</text>
+  <line x1="30" y1="233" x2="330" y2="233" stroke="#d8d8d8" stroke-width="1"/>
+  <rect x="30" y="260" width="10" height="10" fill="#c90000"/>
+  <text x="58" y="272" fill="#2a2a2a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800">Workshops</text>
+  <rect x="30" y="304" width="10" height="10" fill="#c90000"/>
+  <text x="58" y="316" fill="#2a2a2a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800">CV Review</text>
+  <rect x="30" y="348" width="10" height="10" fill="#c90000"/>
+  <text x="58" y="360" fill="#2a2a2a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800">Mock Interviews</text>
+  <rect x="30" y="392" width="150" height="48" fill="#111111"/>
+  <text x="51" y="423" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="900">August 5-9</text>
+  <rect x="30" y="458" width="238" height="44" fill="#c90000"/>
+  <text x="84" y="486" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900">Reserve Seat</text>
+  <path d="M268 415 L360 520 H288 L230 452 Z" fill="#111111" opacity="0.07"/>
+  <rect x="0.5" y="0.5" width="359" height="519" fill="none" stroke="#d8d8d8"/>
+</svg>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280, initial-scale=1.0">
+  <title>ThreadLine News Article</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="data.js" defer></script>
+  <script src="article.js" defer></script>
+</head>
+<body>
+  <div class="top-ad">
+    <div class="top-ad-inner">
+      <img src="assets/ads/top-campus-ad.svg" alt="Campus Fest 2026 advertisement" data-fallback="ad">
+      <span>Advertisement</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <button class="icon-button hamburger" type="button" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <a class="brand" href="index.html" aria-label="ThreadLine News homepage">
+          <span>ThreadLine</span>
+          <strong>News</strong>
+        </a>
+      </div>
+
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="index.html#campus">Campus</a>
+        <a href="index.html#events">Events</a>
+        <a href="index.html#student-life">Student Life</a>
+        <a href="index.html#academics">Academics</a>
+        <a href="index.html#clubs">Clubs</a>
+        <a href="index.html#sports">Sports</a>
+        <a href="index.html#announcements">Announcements</a>
+        <a href="index.html#opinion">Opinion</a>
+        <div class="more-menu">
+          <button id="moreButton" class="nav-button" type="button" aria-expanded="false">More</button>
+          <div id="moreDropdown" class="more-dropdown" hidden>
+            <a href="index.html#career">Career</a>
+            <a href="index.html#scholarships">Scholarships</a>
+            <a href="index.html#research">Research</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <a href="article.html?id=main-campus-story">Watch</a>
+        <a href="index.html#moreCampusStories">Listen</a>
+        <a class="icon-button search-button" href="index.html#searchPanel" aria-label="Search"></a>
+        <button class="sign-in" type="button">Sign In</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="trending-row" aria-label="Trending topics">
+    <div class="page-shell trending-inner">
+      <a href="index.html#freshers">Freshers Week</a>
+      <a href="index.html#career">Career Fair</a>
+      <a href="index.html#student-council">Student Council</a>
+      <a href="index.html#sports-day">Sports Day</a>
+      <a href="index.html#club-recruitment">Club Recruitment</a>
+      <a href="index.html#scholarships">Scholarship Updates</a>
+      <a href="index.html#campus-festival">Campus Festival</a>
+      <a href="index.html#exam-week">Exam Week</a>
+    </div>
+  </div>
+
+  <main class="page-shell article-page">
+    <section class="ticker article-ticker" aria-label="Campus update">
+      <strong>Campus Update</strong>
+      <span>University offices and student groups are posting new event notices, academic reminders, and registration updates this week.</span>
+    </section>
+
+    <div class="article-shell">
+      <article id="articleContent" class="article-content"></article>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-ad">
+          <img src="assets/ads/sidebar-campus-ad.svg" alt="Student Career Week advertisement" data-fallback="ad">
+          <span>Advertisement</span>
+        </div>
+
+        <div class="sidebar-block">
+          <h2>Popular on Campus</h2>
+          <ol id="popularList" class="popular-list"></ol>
+        </div>
+
+        <div class="sidebar-block">
+          <h2>Editor's Picks</h2>
+          <ul id="editorsList" class="compact-list"></ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-shell">
+      <strong>ThreadLine News</strong>
+      <span>Frontend-only campus news portal for manually edited stories.</span>
+    </div>
+  </footer>
+</body>
+</html>

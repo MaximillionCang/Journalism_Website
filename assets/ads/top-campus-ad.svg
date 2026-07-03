@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="160" viewBox="0 0 1200 160" role="img" aria-labelledby="title desc">
+  <title id="title">Campus Fest 2026 advertisement</title>
+  <desc id="desc">A horizontal university event banner for Campus Fest 2026.</desc>
+  <rect width="1200" height="160" fill="#111111"/>
+  <rect x="0" y="0" width="284" height="160" fill="#c90000"/>
+  <rect x="284" y="0" width="916" height="160" fill="#151515"/>
+  <path d="M284 0 L360 0 L292 160 L216 160 Z" fill="#ffffff" opacity="0.10"/>
+  <path d="M945 0 H1200 V160 H870 Z" fill="#c90000"/>
+  <path d="M1015 0 H1078 L1004 160 H940 Z" fill="#ffffff" opacity="0.12"/>
+  <path d="M1120 0 H1200 V160 H1048 Z" fill="#000000" opacity="0.14"/>
+  <circle cx="72" cy="80" r="42" fill="#ffffff"/>
+  <path d="M50 92 L72 52 L94 92 Z" fill="#c90000"/>
+  <rect x="56" y="96" width="32" height="8" fill="#111111"/>
+  <text x="128" y="70" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="800">UNIVERSITY</text>
+  <text x="128" y="98" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="800">EVENT</text>
+  <text x="330" y="66" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="39" font-weight="900">Campus Fest 2026</text>
+  <rect x="330" y="79" width="68" height="4" fill="#c90000"/>
+  <text x="330" y="112" fill="#f1f1f1" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800">Music | Food | Games | Showcase</text>
+  <text x="330" y="139" fill="#bdbdbd" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Central Quad</text>
+  <text x="928" y="55" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800">SAVE THE DATE</text>
+  <text x="928" y="86" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900">July 12-14</text>
+  <rect x="928" y="106" width="188" height="38" fill="#ffffff"/>
+  <text x="981" y="131" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Register</text>
+</svg>
