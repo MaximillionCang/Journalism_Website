@@ -6,9 +6,9 @@ const mainStory = {
   id: "main-campus-story",
   title: "Second-Hand, First Choice: FYNEDRIP Brings Thrifting Culture to Xiamen University",
   category: "Event",
-  date: "July 2, 2026",
-  image: "assets/images/main-story.jpg",
-  videoPath: "assets/videos/main-news.mp4",
+  date: "July 3, 2026",
+  image: "assets/images/main-story.png",
+  videoPath: "assets/videos/Main-Text-Video.mp4",
   summary: "The main story is reserved for your manually written campus report and local video file. Replace this sample text when your final story is ready.",
   sourceName: "ThreadLine News Desk",
   sourceUrl: "https://example.com/main-campus-story",
@@ -18,7 +18,7 @@ const mainStory = {
     "The vice-organising chairperson of FyneDrip, Then Nelsen said that purchasing second-hand clothing would reduce textile-waste of the fashion industry, especially among a generation that has such an interest in shopping. ",
     "“Students are satisfied with this event and they look interested because this is the first thrifting event in Xiamen,” he said.",
     "Living in a university in the outskirts of the city, students get a chance to purchase good quality clothes without having to travel far.",
-    "“I hope visitors can know that if you want to buy a good style or good shirt, you can go thrifting with a low price,” Nelsen added..",
+    "“I hope visitors can know that if you want to buy a good style or good shirt, you can go thrifting with a low price,” Nelsen added.",
     "As a sports enthusiast, a customer at FyneDrip, Ricwan Victoriano agrees that thrifting provides a much cheaper alternative than buying the original piece, especially when looking for sports jerseys.",
     "He also added that thrifting does not only benefit himself as a customer, but also towards the environment that everybody lives in.",
     "\"I think thrifting is very important because these days, mostly everything is environmentally friendly so I think fashion can also catch up with the times,\" Victoriano said.",
@@ -41,7 +41,7 @@ const supportingStories = [
   {
     id: "story-1",
     title: "NYMD announces designer lineup for SS27 edition",
-    category: "Events",
+    category: "Event",
     date: "July 1, 2026",
     image: "assets/images/story-1.jpg",
     summary: "New York Men's Day has announced its Spring/Summer 2027 designer lineup, featuring a mix of returning and debut brands.",
@@ -145,7 +145,7 @@ const supportingStories = [
 // Edit this homepage poll text and options as needed.
 const homepagePoll = {
   id: "homepage-poll-1",
-  question: "Which topic should Threadlines News cover next?",
+  question: "Which topic should ThreadLine News cover next?",
   options: [
     "fashion business",
     "trends",

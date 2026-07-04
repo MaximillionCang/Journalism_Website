@@ -1,24 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="160" viewBox="0 0 1200 160" role="img" aria-labelledby="title desc">
-  <title id="title">Campus Fest 2026 advertisement</title>
-  <desc id="desc">A horizontal university event banner for Campus Fest 2026.</desc>
-  <rect width="1200" height="160" fill="#111111"/>
-  <rect x="0" y="0" width="284" height="160" fill="#c90000"/>
-  <rect x="284" y="0" width="916" height="160" fill="#151515"/>
-  <path d="M284 0 L360 0 L292 160 L216 160 Z" fill="#ffffff" opacity="0.10"/>
-  <path d="M945 0 H1200 V160 H870 Z" fill="#c90000"/>
-  <path d="M1015 0 H1078 L1004 160 H940 Z" fill="#ffffff" opacity="0.12"/>
-  <path d="M1120 0 H1200 V160 H1048 Z" fill="#000000" opacity="0.14"/>
-  <circle cx="72" cy="80" r="42" fill="#ffffff"/>
-  <path d="M50 92 L72 52 L94 92 Z" fill="#c90000"/>
-  <rect x="56" y="96" width="32" height="8" fill="#111111"/>
-  <text x="128" y="70" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="800">UNIVERSITY</text>
-  <text x="128" y="98" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="800">EVENT</text>
-  <text x="330" y="66" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="39" font-weight="900">Campus Fest 2026</text>
-  <rect x="330" y="79" width="68" height="4" fill="#c90000"/>
-  <text x="330" y="112" fill="#f1f1f1" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800">Music | Food | Games | Showcase</text>
-  <text x="330" y="139" fill="#bdbdbd" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Central Quad</text>
-  <text x="928" y="55" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800">SAVE THE DATE</text>
-  <text x="928" y="86" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900">July 12-14</text>
-  <rect x="928" y="106" width="188" height="38" fill="#ffffff"/>
-  <text x="981" y="131" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Register</text>
+<svg width="980" height="131" viewBox="0 0 980 131" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="adTitle adDesc">
+  <title id="adTitle">ThreadLine Sustainable Fashion Week Advertisement</title>
+  <desc id="adDesc">A dark blue advertisement for ThreadLine Sustainable Fashion Week.</desc>
+
+  <rect width="980" height="131" fill="#061a35"/>
+  <path d="M0 0H300L260 131H0Z" fill="#071f40"/>
+  <path d="M300 0H730L690 131H260Z" fill="#0b2d5c" opacity="0.55"/>
+  <path d="M730 0H980V131H690Z" fill="#082449"/>
+  <path d="M815 0H895L845 131H765Z" fill="#123f7a" opacity="0.42"/>
+  <path d="M925 0H980V131H885Z" fill="#eef4fb" opacity="0.13"/>
+
+  <circle cx="70" cy="65" r="35" fill="#eef4fb"/>
+  <path d="M42 76C50 54 65 42 81 42C97 42 108 55 115 76H98C93 66 85 59 74 59C63 59 55 66 49 76H42Z" fill="#0b2d5c"/>
+  <path d="M45 84H111V90H45Z" fill="#0b2d5c"/>
+  <path d="M62 80C68 72 80 72 87 80H62Z" fill="#0b2d5c"/>
+
+  <text x="125" y="43" fill="#d7e7fa" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800" letter-spacing="1.8">THREADLINE</text>
+  <text x="125" y="72" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="900">Fashion News</text>
+  <text x="125" y="96" fill="#bcd5f2" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Special Coverage</text>
+
+  <text x="515" y="47" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900">Sustainable</text>
+  <text x="515" y="80" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900">Fashion Week</text>
+  <text x="515" y="105" text-anchor="middle" fill="#d7e7fa" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Vintage Finds â€¢ Upcycled Looks â€¢ Campus Style</text>
+  <line x1="435" y1="114" x2="595" y2="114" stroke="#bcd5f2" stroke-width="3" stroke-linecap="round"/>
+
+  <text x="850" y="43" text-anchor="middle" fill="#d7e7fa" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="900" letter-spacing="1">JULY 2026</text>
+  <rect x="775" y="60" width="150" height="40" rx="3" fill="#ffffff"/>
+  <text x="850" y="86" text-anchor="middle" fill="#061a35" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Explore</text>
+  <text x="850" y="116" text-anchor="middle" fill="#bcd5f2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">ThreadLine News edit</text>
 </svg>

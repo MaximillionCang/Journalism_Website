@@ -1,10 +1,50 @@
 (function () {
   const data = window.ThreadLineData || {};
   const placeholderPath = "assets/images/placeholder.jpg";
-  const videoFallbackText = "ThreadLine News video will appear here after the local video file is added.";
+  const videoFallbackText = "Video unavailable. Check that the local video file exists at the path listed in data.js.";
+  const allCategoryLabel = "All";
 
   function allArticles() {
     return [data.mainStory].concat(data.supportingStories || []).filter(Boolean);
+  }
+
+  function uniqueArticlesById(articles) {
+    const seen = new Set();
+
+    return (articles || []).filter((article) => {
+      if (!article || !article.id || seen.has(article.id)) {
+        return false;
+      }
+
+      seen.add(article.id);
+      return true;
+    });
+  }
+
+  function getCategories() {
+    const seen = new Set();
+    const categories = [];
+
+    allArticles().forEach((article) => {
+      const category = String(article.category || "").trim();
+      const key = category.toLowerCase();
+
+      if (category && !seen.has(key)) {
+        seen.add(key);
+        categories.push(category);
+      }
+    });
+
+    return categories;
+  }
+
+  function slugifyCategory(category) {
+    return String(category || "")
+      .trim()
+      .toLowerCase()
+      .replace(/&/g, "and")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "all";
   }
 
   function findArticle(id) {
@@ -13,6 +53,15 @@
 
   function storyUrl(article) {
     return `article.html?id=${encodeURIComponent(article.id)}`;
+  }
+
+  function categoryUrl(category) {
+    if (category === allCategoryLabel) {
+      return "index.html";
+    }
+
+    const value = category === allCategoryLabel ? allCategoryLabel : category;
+    return `index.html?category=${encodeURIComponent(value)}#categoryResults`;
   }
 
   function escapeHtml(value) {
@@ -72,37 +121,66 @@
 
       video.dataset.fallbackListener = "true";
       let replaced = false;
+      const sources = Array.from(video.querySelectorAll("source"));
+      const hasSource = sources.some((source) => source.getAttribute("src"));
+
       const showFallback = () => {
-        if (replaced) {
+        if (replaced || video.readyState > 0) {
           return;
         }
         replaced = true;
         video.replaceWith(fallbackBox(videoFallbackText, "video-fallback"));
       };
 
+      if (!hasSource) {
+        showFallback();
+        return;
+      }
+
+      video.preload = "metadata";
       video.addEventListener("error", showFallback);
-      video.querySelectorAll("source").forEach((source) => {
+      sources.forEach((source) => {
         source.addEventListener("error", showFallback);
       });
-      video.preload = "metadata";
-      video.load();
-      window.setTimeout(() => {
-        if (video.error || video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
-          showFallback();
+    });
+  }
+
+  function renderCategoryNav(activeCategory) {
+    const categoryNav = document.getElementById("categoryNav");
+    const dropdown = document.getElementById("moreDropdown");
+    const categories = [allCategoryLabel].concat(getCategories());
+
+    [categoryNav, dropdown].forEach((container) => {
+      if (!container) {
+        return;
+      }
+
+      container.innerHTML = "";
+      categories.forEach((category) => {
+        const link = document.createElement("a");
+        link.href = categoryUrl(category);
+        link.dataset.category = category;
+        link.dataset.categorySlug = slugifyCategory(category);
+        link.textContent = category;
+
+        if (category === activeCategory || (!activeCategory && category === allCategoryLabel)) {
+          link.classList.add("is-active");
+          link.setAttribute("aria-current", "page");
         }
-      }, 600);
+
+        if (container === categoryNav) {
+          link.classList.add("category-button");
+        }
+
+        container.appendChild(link);
+      });
     });
   }
 
   function relatedArticles(currentArticle) {
-    const stories = data.supportingStories || [];
-    const categoryMatches = stories.filter((article) => {
-      return article.id !== currentArticle.id && article.category === currentArticle.category;
-    });
-
-    const otherStories = stories.filter((article) => {
-      return article.id !== currentArticle.id && article.category !== currentArticle.category;
-    });
+    const articles = uniqueArticlesById(allArticles()).filter((article) => article.id !== currentArticle.id);
+    const categoryMatches = articles.filter((article) => article.category === currentArticle.category);
+    const otherStories = articles.filter((article) => article.category !== currentArticle.category);
 
     return categoryMatches.concat(otherStories).slice(0, 3);
   }
@@ -133,7 +211,7 @@
   function renderArticle(container, article) {
     const paragraphs = Array.isArray(article.content) ? article.content : [];
     const videoMarkup = article.videoPath ? `
-      <video class="article-video" controls poster="${escapeHtml(article.image)}">
+      <video class="article-video" controls preload="metadata" poster="${escapeHtml(article.image)}">
         <source src="${escapeHtml(article.videoPath)}" type="video/mp4">
         ${videoFallbackText}
       </video>
@@ -252,6 +330,8 @@
     const params = new URLSearchParams(window.location.search);
     const article = findArticle(params.get("id"));
     const container = document.getElementById("articleContent");
+
+    renderCategoryNav(article ? article.category : allCategoryLabel);
 
     if (!container) {
       return;

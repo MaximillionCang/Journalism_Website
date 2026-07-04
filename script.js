@@ -1,14 +1,64 @@
 (function () {
   const data = window.ThreadLineData || {};
   const placeholderPath = "assets/images/placeholder.jpg";
-  const videoFallbackText = "ThreadLine News video will appear here after the local video file is added.";
+  const videoFallbackText = "Video unavailable. Check that the local video file exists at the path listed in data.js.";
+  const allCategoryLabel = "All";
+  let activeCategory = allCategoryLabel;
 
   function allArticles() {
     return [data.mainStory].concat(data.supportingStories || []).filter(Boolean);
   }
 
+  function uniqueArticlesById(articles) {
+    const seen = new Set();
+
+    return (articles || []).filter((article) => {
+      if (!article || !article.id || seen.has(article.id)) {
+        return false;
+      }
+
+      seen.add(article.id);
+      return true;
+    });
+  }
+
+  function getCategories() {
+    const seen = new Set();
+    const categories = [];
+
+    allArticles().forEach((article) => {
+      const category = String(article.category || "").trim();
+      const key = category.toLowerCase();
+
+      if (category && !seen.has(key)) {
+        seen.add(key);
+        categories.push(category);
+      }
+    });
+
+    return categories;
+  }
+
+  function slugifyCategory(category) {
+    return String(category || "")
+      .trim()
+      .toLowerCase()
+      .replace(/&/g, "and")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "all";
+  }
+
   function storyUrl(article) {
     return `article.html?id=${encodeURIComponent(article.id)}`;
+  }
+
+  function categoryUrl(category) {
+    if (category === allCategoryLabel) {
+      return "index.html";
+    }
+
+    const value = category === allCategoryLabel ? allCategoryLabel : category;
+    return `index.html?category=${encodeURIComponent(value)}#categoryResults`;
   }
 
   function goToArticle(article) {
@@ -72,25 +122,27 @@
 
       video.dataset.fallbackListener = "true";
       let replaced = false;
+      const sources = Array.from(video.querySelectorAll("source"));
+      const hasSource = sources.some((source) => source.getAttribute("src"));
+
       const showFallback = () => {
-        if (replaced) {
+        if (replaced || video.readyState > 0) {
           return;
         }
         replaced = true;
         video.replaceWith(fallbackBox(videoFallbackText, "video-fallback"));
       };
 
+      if (!hasSource) {
+        showFallback();
+        return;
+      }
+
+      video.preload = "metadata";
       video.addEventListener("error", showFallback);
-      video.querySelectorAll("source").forEach((source) => {
+      sources.forEach((source) => {
         source.addEventListener("error", showFallback);
       });
-      video.preload = "metadata";
-      video.load();
-      window.setTimeout(() => {
-        if (video.error || video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
-          showFallback();
-        }
-      }, 600);
     });
   }
 
@@ -124,6 +176,125 @@
     return card;
   }
 
+  function normalizeCategory(category) {
+    const requested = String(category || "").trim();
+
+    if (!requested || requested.toLowerCase() === allCategoryLabel.toLowerCase()) {
+      return allCategoryLabel;
+    }
+
+    return getCategories().find((item) => item.toLowerCase() === requested.toLowerCase()) || allCategoryLabel;
+  }
+
+  function updateActiveCategoryButtons() {
+    document.querySelectorAll("[data-category]").forEach((element) => {
+      const isActive = element.dataset.category === activeCategory;
+      element.classList.toggle("is-active", isActive);
+      if (element.classList.contains("category-button")) {
+        element.setAttribute("aria-pressed", String(isActive));
+      }
+    });
+  }
+
+  function renderCategoryResults(category) {
+    const section = document.getElementById("categoryResults");
+    const title = document.getElementById("categoryResultsTitle");
+    const grid = document.getElementById("categoryResultsGrid");
+    activeCategory = normalizeCategory(category);
+
+    if (!section || !title || !grid) {
+      updateActiveCategoryButtons();
+      return;
+    }
+
+    grid.innerHTML = "";
+
+    if (activeCategory === allCategoryLabel) {
+      section.hidden = true;
+      updateActiveCategoryButtons();
+      return;
+    }
+
+    const matchingStories = uniqueArticlesById(
+      (data.supportingStories || []).filter((article) => article.category === activeCategory)
+    );
+
+    title.textContent = `${activeCategory} Stories`;
+    section.hidden = false;
+
+    if (!matchingStories.length) {
+      grid.innerHTML = '<div class="empty-message">No supporting stories are available in this category yet.</div>';
+    } else {
+      matchingStories.forEach((article) => {
+        grid.appendChild(createCard(article));
+      });
+    }
+
+    updateActiveCategoryButtons();
+  }
+
+  function handleCategoryClick(event) {
+    const trigger = event.currentTarget;
+    const category = trigger.dataset.category || allCategoryLabel;
+    const menu = trigger.closest(".more-dropdown");
+
+    event.preventDefault();
+    renderCategoryResults(category);
+    window.history.pushState({}, "", categoryUrl(activeCategory));
+
+    if (menu) {
+      menu.hidden = true;
+      const button = document.getElementById("moreButton");
+      if (button) {
+        button.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    const results = document.getElementById("categoryResults");
+    const normalHomepageTarget = document.getElementById("heroStory");
+    if (activeCategory === allCategoryLabel && normalHomepageTarget) {
+      normalHomepageTarget.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else if (results) {
+      results.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  function renderCategoryNav() {
+    const categoryNav = document.getElementById("categoryNav");
+    const dropdown = document.getElementById("moreDropdown");
+    const categories = [allCategoryLabel].concat(getCategories());
+
+    if (categoryNav) {
+      categoryNav.innerHTML = "";
+      categories.forEach((category) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "category-button";
+        button.dataset.category = category;
+        button.dataset.categorySlug = slugifyCategory(category);
+        button.setAttribute("aria-pressed", "false");
+        button.textContent = category;
+        button.addEventListener("click", handleCategoryClick);
+        categoryNav.appendChild(button);
+      });
+    }
+
+    if (dropdown) {
+      dropdown.innerHTML = "";
+      categories.forEach((category) => {
+        const link = document.createElement("a");
+        link.href = categoryUrl(category);
+        link.dataset.category = category;
+        link.dataset.categorySlug = slugifyCategory(category);
+        link.textContent = category;
+        link.addEventListener("click", handleCategoryClick);
+        dropdown.appendChild(link);
+      });
+    }
+
+    updateActiveCategoryButtons();
+  }
+
   function renderHero() {
     const hero = document.getElementById("heroStory");
     const story = data.mainStory;
@@ -132,26 +303,29 @@
       return;
     }
 
-    hero.innerHTML = `
-      <span class="badge">${escapeHtml(story.category || "Top Story")}</span>
-      <h1>${escapeHtml(story.title)}</h1>
-      <video class="hero-video" controls poster="${escapeHtml(story.image)}">
+    const paragraphs = Array.isArray(story.content) ? story.content : [];
+    const videoMarkup = story.videoPath ? `
+      <video class="hero-video" controls preload="metadata" poster="${escapeHtml(story.image)}">
         <source src="${escapeHtml(story.videoPath)}" type="video/mp4">
         ${videoFallbackText}
       </video>
+    ` : `<div class="fallback-box video-fallback">${escapeHtml(videoFallbackText)}</div>`;
+
+    hero.innerHTML = `
+      <span class="badge">${escapeHtml(story.category || "Top Story")}</span>
+      <h1>${escapeHtml(story.title)}</h1>
       <p class="summary">${escapeHtml(story.summary)}</p>
       <div class="story-meta">
         <span>${escapeHtml(story.date)}</span>
         <span>${escapeHtml(story.sourceName)}</span>
       </div>
-      <a class="read-more" href="${storyUrl(story)}">Read full story</a>
+      ${videoMarkup}
+      <div class="homepage-article-body">
+        <h2>Full Report</h2>
+        ${paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
+      </div>
+      <a class="read-more" href="${storyUrl(story)}">Open article page</a>
     `;
-
-    hero.addEventListener("click", (event) => {
-      if (!event.target.closest("video") && !event.target.closest("a")) {
-        goToArticle(story);
-      }
-    });
 
     activateImageFallbacks(hero);
     activateVideoFallbacks(hero);
@@ -308,15 +482,23 @@
     const searchPanel = document.getElementById("searchPanel");
     const searchInput = document.getElementById("searchInput");
 
-    if (!searchToggle || !searchPanel || !searchInput) {
+    if (!searchPanel || !searchInput) {
       return;
     }
 
-    searchToggle.addEventListener("click", () => {
-      searchPanel.hidden = !searchPanel.hidden;
-      if (!searchPanel.hidden) {
-        searchInput.focus();
-      }
+    if (searchToggle) {
+      searchToggle.addEventListener("click", () => {
+        searchPanel.hidden = !searchPanel.hidden;
+        if (!searchPanel.hidden) {
+          searchInput.focus();
+        }
+      });
+    }
+
+    document.querySelectorAll('a[href="#searchPanel"]').forEach((link) => {
+      link.addEventListener("click", () => {
+        window.setTimeout(openSearchPanel, 0);
+      });
     });
 
     searchInput.addEventListener("input", () => renderSearchResults(searchInput.value));
@@ -398,6 +580,11 @@
     localStorage.setItem(pollVoteKey(poll), JSON.stringify(votes));
   }
 
+  function clearPollData(poll) {
+    localStorage.removeItem(pollVoteKey(poll));
+    localStorage.removeItem(pollChoiceKey(poll));
+  }
+
   function renderPoll() {
     const container = document.getElementById("pollSection");
     const poll = data.homepagePoll;
@@ -446,7 +633,16 @@
     voteButton.type = "submit";
     voteButton.textContent = savedChoice ? "Vote recorded" : "Vote";
     voteButton.disabled = Boolean(savedChoice);
-    form.appendChild(voteButton);
+
+    const clearVoteButton = document.createElement("button");
+    clearVoteButton.className = "secondary-button poll-clear-vote";
+    clearVoteButton.type = "button";
+    clearVoteButton.textContent = "Clear local vote";
+
+    const actions = document.createElement("div");
+    actions.className = "poll-actions";
+    actions.append(voteButton, clearVoteButton);
+    form.appendChild(actions);
 
     // Poll results are stored locally in this browser only; there is no backend or shared vote count.
     form.addEventListener("submit", (event) => {
@@ -462,6 +658,11 @@
       votes[selectedIndex] += 1;
       savePollVotes(poll, votes);
       localStorage.setItem(choiceKey, String(selectedIndex));
+      renderPoll();
+    });
+
+    clearVoteButton.addEventListener("click", () => {
+      clearPollData(poll);
       renderPoll();
     });
 
@@ -613,12 +814,35 @@
     renderComments();
   }
 
+  function renderInitialCategoryFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get("category");
+
+    if (category) {
+      renderCategoryResults(category);
+      return;
+    }
+
+    activeCategory = allCategoryLabel;
+    const section = document.getElementById("categoryResults");
+    const grid = document.getElementById("categoryResultsGrid");
+    if (section) {
+      section.hidden = true;
+    }
+    if (grid) {
+      grid.innerHTML = "";
+    }
+    updateActiveCategoryButtons();
+  }
+
   function init() {
     document.title = "ThreadLine News";
+    renderCategoryNav();
     renderHero();
     renderLeftColumn();
     renderRightColumn();
     renderSupportingStories();
+    renderInitialCategoryFromUrl();
     renderPoll();
     setupComments();
     setupSearch();

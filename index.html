@@ -11,7 +11,7 @@
 <body>
   <div class="top-ad">
     <div class="top-ad-inner">
-      <img src="assets/ads/top-campus-ad.svg" alt="Campus Fest 2026 advertisement" data-fallback="ad">
+      <img src="assets/ads/top-campus-ad.svg" alt="Sustainable Fashion Week advertisement" data-fallback="ad">
       <span>Advertisement</span>
     </div>
   </div>
@@ -31,21 +31,14 @@
       </div>
 
       <nav class="primary-nav" aria-label="Primary navigation">
-        <a href="#campus">Campus</a>
-        <a href="#events">Events</a>
-        <a href="#student-life">Student Life</a>
-        <a href="#academics">Academics</a>
-        <a href="#clubs">Clubs</a>
-        <a href="#sports">Sports</a>
-        <a href="#announcements">Announcements</a>
-        <a href="#opinion">Opinion</a>
+        <a href="index.html">Home</a>
+        <a href="#heroStory">Main Story</a>
+        <a href="#moreStories">More Stories</a>
+        <a href="#searchPanel">Search</a>
+        <a href="#commentsSection">Comments</a>
         <div class="more-menu">
-          <button id="moreButton" class="nav-button" type="button" aria-expanded="false">More</button>
-          <div id="moreDropdown" class="more-dropdown" hidden>
-            <a href="#career">Career</a>
-            <a href="#scholarships">Scholarships</a>
-            <a href="#research">Research</a>
-          </div>
+          <button id="moreButton" class="nav-button" type="button" aria-expanded="false">Categories</button>
+          <div id="moreDropdown" class="more-dropdown" hidden></div>
         </div>
       </nav>
 
@@ -67,16 +60,7 @@
   </header>
 
   <div class="trending-row" aria-label="Trending topics">
-    <div class="page-shell trending-inner">
-      <a href="#freshers">Thrift Finds</a>
-      <a href="#career">Vintage Edit</a>
-      <a href="#student-council">Fashion Business</a>
-      <a href="#sports-day">Retail Watch</a>
-      <a href="#club-recruitment">Street Style</a>
-      <a href="#scholarships">Designer News</a>
-      <a href="#campus-festival">Sustainable Style</a>
-      <a href="#exam-week">Trend Report</a>
-    </div>
+    <div id="categoryNav" class="page-shell trending-inner category-nav"></div>
   </div>
 
   <main class="page-shell">
@@ -95,6 +79,14 @@
         <h2>Search Results</h2>
       </div>
       <div id="searchResultsGrid" class="card-grid"></div>
+    </section>
+
+    <section id="categoryResults" class="news-section category-results" hidden>
+      <div class="section-heading">
+        <span>Browse by Category</span>
+        <h2 id="categoryResultsTitle">All Stories</h2>
+      </div>
+      <div id="categoryResultsGrid" class="card-grid"></div>
     </section>
 
     <section class="main-grid" aria-label="Top campus stories">
@@ -118,7 +110,7 @@
         <div id="pollSection" class="sidebar-block poll-card"></div>
 
         <div class="sidebar-ad">
-          <img src="assets/ads/sidebar-campus-ad.svg" alt="ThreadLine News advertisement" data-fallback="ad">
+          <img src="assets/ads/sidebar-campus-ad.svg" alt="Sustainable Fashion Week advertisement" data-fallback="ad">
           <span>Advertisement</span>
         </div>
       </aside>

@@ -1,6 +1,8 @@
 :root {
-  --red: #c90000;
-  --red-dark: #950000;
+  --accent: #0b2d5c;
+  --accent-dark: #061a35;
+  --accent-hover: #123f7a;
+  --accent-soft: #eef4fb;
   --black: #111111;
   --ink: #222222;
   --muted: #666666;
@@ -134,7 +136,7 @@ li {
 }
 
 .brand span {
-  color: var(--red);
+  color: var(--accent);
 }
 
 .brand strong {
@@ -149,7 +151,7 @@ li {
   align-items: center;
   justify-content: center;
   border: 1px solid transparent;
-  background: transparent;
+  background: #ffffff;
   cursor: pointer;
 }
 
@@ -203,8 +205,9 @@ li {
 
 .primary-nav a:hover,
 .nav-button:hover,
-.header-actions a:hover {
-  color: var(--red);
+.header-actions a:hover,
+.more-dropdown a.is-active {
+  color: var(--accent);
 }
 
 .more-menu {
@@ -241,6 +244,10 @@ li {
   background: #f7f7f7;
 }
 
+.more-dropdown a.is-active {
+  background: var(--accent-soft);
+}
+
 .header-actions {
   gap: 13px;
   flex: 0 0 auto;
@@ -258,8 +265,8 @@ li {
 }
 
 .sign-in:hover {
-  background: var(--red-dark);
-  border-color: var(--red-dark);
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
 }
 
 .mobile-menu {
@@ -278,7 +285,7 @@ li {
 }
 
 .mobile-menu a:hover {
-  color: var(--red);
+  color: var(--accent);
 }
 
 .trending-row {
@@ -288,20 +295,42 @@ li {
 
 .trending-inner {
   height: 44px;
-  gap: 0;
+  gap: 8px;
   overflow: hidden;
   font-size: 13px;
 }
 
-.trending-inner a {
-  padding: 0 16px;
-  border-right: 1px solid var(--line);
+.trending-inner a,
+.trending-inner button {
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--black);
   font-weight: 700;
+  line-height: 30px;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
-.trending-inner a:first-child {
-  padding-left: 0;
-  color: var(--red);
+.trending-inner a:first-child,
+.trending-inner button:first-child {
+  padding-left: 14px;
+}
+
+.trending-inner a:hover,
+.trending-inner button:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.category-button.is-active {
+  color: var(--accent);
+}
+
+.trending-inner .category-button.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
 }
 
 .ticker {
@@ -310,14 +339,14 @@ li {
   align-items: center;
   margin: 20px 0 24px;
   padding: 11px 14px;
-  border-top: 3px solid var(--red);
+  border-top: 3px solid var(--accent);
   border-bottom: 1px solid var(--line);
   background: var(--band);
   font-size: 14px;
 }
 
 .ticker strong {
-  color: var(--red);
+  color: var(--accent);
   text-transform: uppercase;
 }
 
@@ -354,7 +383,7 @@ li {
 .search-panel input:focus,
 .comment-form input:focus,
 .comment-form textarea:focus {
-  border-color: var(--red);
+  border-color: var(--accent);
 }
 
 .main-grid {
@@ -382,16 +411,19 @@ li {
 }
 
 .side-story,
-.hero-story,
 .compact-feature,
 .news-card {
   cursor: pointer;
 }
 
+.hero-story {
+  cursor: default;
+}
+
 .side-story:hover,
 .compact-feature:hover,
 .news-card:hover {
-  border-color: var(--red);
+  border-color: var(--accent);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
   transform: translateY(-1px);
 }
@@ -402,7 +434,7 @@ li {
 .news-card:hover h3,
 .compact-list a:hover,
 .popular-list a:hover {
-  color: var(--red);
+  color: var(--accent);
 }
 
 .large-side-story {
@@ -460,7 +492,7 @@ li {
 .label,
 .section-label {
   display: inline-block;
-  color: var(--red);
+  color: var(--accent);
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
@@ -494,7 +526,7 @@ li {
   display: inline-block;
   margin-bottom: 10px;
   padding: 5px 8px;
-  background: var(--red);
+  background: var(--accent);
   color: #ffffff;
   font-size: 12px;
   font-weight: 800;
@@ -527,7 +559,7 @@ li {
   height: 4px;
   margin-right: 12px;
   vertical-align: middle;
-  background: var(--red);
+  background: var(--accent);
 }
 
 .read-more,
@@ -545,17 +577,18 @@ li {
 .read-more:hover,
 .source-button:hover,
 .home-button:hover {
-  background: var(--red-dark);
+  background: var(--accent-hover);
 }
 
 .read-more:focus-visible,
 .source-button:focus-visible,
 .home-button:focus-visible,
 .icon-button:focus-visible,
+.category-button:focus-visible,
 .news-card:focus-visible,
 .side-story:focus-visible,
 .compact-feature:focus-visible {
-  outline: 2px solid var(--red);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -668,7 +701,7 @@ li {
 
 .poll-option input {
   margin-top: 3px;
-  accent-color: var(--red);
+  accent-color: var(--accent);
 }
 
 .poll-vote {
@@ -681,6 +714,17 @@ li {
 .poll-vote:disabled {
   background: #555555;
   cursor: default;
+}
+
+.poll-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.poll-clear-vote {
+  margin-top: 2px;
 }
 
 .poll-results {
@@ -709,7 +753,7 @@ li {
 .poll-result-bar span {
   display: block;
   height: 100%;
-  background: var(--red);
+  background: var(--accent);
 }
 
 .poll-count {
@@ -721,6 +765,12 @@ li {
   margin-top: 36px;
 }
 
+.category-results {
+  margin: 0 0 34px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+
 .section-heading {
   border-top: 3px solid var(--black);
   border-bottom: 1px solid var(--line);
@@ -729,7 +779,7 @@ li {
 .section-heading span {
   display: inline-block;
   margin-top: 10px;
-  color: var(--red);
+  color: var(--accent);
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
@@ -790,6 +840,27 @@ li {
   color: var(--muted);
 }
 
+.homepage-article-body {
+  max-width: 760px;
+  margin: 20px 0 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.homepage-article-body h2 {
+  margin: 0 0 12px;
+  color: var(--black);
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.homepage-article-body p {
+  margin: 0 0 17px;
+  color: #2c2c2c;
+  font-size: 18px;
+  line-height: 1.68;
+}
+
 .comment-form {
   display: grid;
   grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
@@ -821,8 +892,8 @@ li {
 }
 
 .secondary-button:hover {
-  border-color: var(--red);
-  color: var(--red);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .form-message {
@@ -882,7 +953,7 @@ li {
 }
 
 .article-kicker {
-  color: var(--red);
+  color: var(--accent);
   font-size: 13px;
   font-weight: 800;
   text-transform: uppercase;
@@ -912,7 +983,7 @@ li {
   height: 4px;
   margin-right: 12px;
   vertical-align: middle;
-  background: var(--red);
+  background: var(--accent);
 }
 
 .article-hero-image {
@@ -1167,9 +1238,14 @@ li {
     scrollbar-width: thin;
   }
 
-  .trending-inner a {
+  .trending-inner a,
+  .trending-inner button {
     flex: 0 0 auto;
     padding: 0 12px;
+  }
+
+  .trending-inner .category-button.is-active {
+    padding-left: 12px;
   }
 
   .ticker {
