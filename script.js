@@ -311,10 +311,12 @@
       </video>
     ` : `<div class="fallback-box video-fallback">${escapeHtml(videoFallbackText)}</div>`;
 
+    const summaryMarkup = story.summary ? `<p class="summary">${escapeHtml(story.summary)}</p>` : "";
+
     hero.innerHTML = `
       <span class="badge">${escapeHtml(story.category || "Top Story")}</span>
       <h1>${escapeHtml(story.title)}</h1>
-      <p class="summary">${escapeHtml(story.summary)}</p>
+      ${summaryMarkup}
       <div class="story-meta">
         <span>${escapeHtml(story.date)}</span>
         <span>${escapeHtml(story.sourceName)}</span>

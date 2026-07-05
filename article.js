@@ -216,6 +216,9 @@
         ${videoFallbackText}
       </video>
     ` : "";
+    const heroImageMarkup = article.videoPath ? "" : `
+      <img class="article-hero-image" src="${escapeHtml(article.image)}" alt="${escapeHtml(article.title)}">
+    `;
 
     const sourceMarkup = article.sourceUrl ? `
       <a class="source-button" href="${escapeHtml(article.sourceUrl)}" target="_blank" rel="noopener">Read original source</a>
@@ -240,7 +243,7 @@
         <span>${escapeHtml(article.date)}</span>
         <span>Source: ${escapeHtml(article.sourceName)}</span>
       </div>
-      <img class="article-hero-image" src="${escapeHtml(article.image)}" alt="${escapeHtml(article.title)}">
+      ${heroImageMarkup}
       ${videoMarkup}
       <div class="article-body">
         ${paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}

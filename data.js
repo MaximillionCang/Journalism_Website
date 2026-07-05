@@ -9,10 +9,10 @@ const mainStory = {
   date: "July 3, 2026",
   image: "assets/images/main-story.png",
   videoPath: "assets/videos/Main-Text-Video.mp4",
-  summary: "The main story is reserved for your manually written campus report and local video file. Replace this sample text when your final story is ready.",
+  summary: "",
   sourceName: "ThreadLine News Desk",
   sourceUrl: "https://example.com/main-campus-story",
-  author: "YOVELA KARUNIA",
+  author: "YOVELA KARUNIA, JONAS SIE",
   content: [
     "SEPANG: Students and fashion enthusiasts gathered at Xiamen University Malaysia during a thrifting event for a cheaper and more sustainable choice of fashion last Thursday.",
     "The vice-organising chairperson of FyneDrip, Then Nelsen said that purchasing second-hand clothing would reduce textile-waste of the fashion industry, especially among a generation that has such an interest in shopping. ",
